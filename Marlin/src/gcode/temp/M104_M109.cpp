@@ -74,6 +74,7 @@
  *  (used by printingIsActive, etc.) and turning off heaters will stop the timer.
  */
 void GcodeSuite::M104_M109(const bool isM109) {
+  return;
 
   if (DEBUGGING(DRYRUN)) return;
 

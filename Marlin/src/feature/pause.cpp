@@ -138,6 +138,8 @@ fil_change_settings_t fc_settings[EXTRUDERS];
  * Returns 'true' if heating was completed, 'false' for abort
  */
 static bool ensure_safe_temperature(const bool wait=true, const PauseMode mode=PAUSE_MODE_SAME) {
+  return true;
+
   DEBUG_SECTION(est, "ensure_safe_temperature", true);
   DEBUG_ECHOLNPGM("... wait:", wait, " mode:", mode);
 
@@ -259,14 +261,35 @@ bool load_filament(const_float_t slow_load_length/*=0*/, const_float_t fast_load
 
   #if ENABLED(ADVANCED_PAUSE_CONTINUOUS_PURGE)
 
-    if (show_lcd) ui.pause_show_message(PAUSE_MESSAGE_PURGE);
+    do {
+      if (show_lcd) ui.pause_show_message(PAUSE_MESSAGE_PURGE);
 
-    TERN_(EXTENSIBLE_UI, ExtUI::onUserConfirmRequired(GET_TEXT_F(MSG_FILAMENT_CHANGE_PURGE)));
-    TERN_(HOST_PROMPT_SUPPORT, hostui.continue_prompt(GET_TEXT_F(MSG_FILAMENT_CHANGE_PURGE)));
-    wait_for_user = true; // A click or M108 breaks the purge_length loop
-    for (float purge_count = purge_length; purge_count > 0 && wait_for_user; --purge_count)
-      unscaled_e_move(1, ADVANCED_PAUSE_PURGE_FEEDRATE);
-    wait_for_user = false;
+      TERN_(EXTENSIBLE_UI, ExtUI::onUserConfirmRequired(GET_TEXT_F(MSG_FILAMENT_CHANGE_PURGE)));
+      TERN_(HOST_PROMPT_SUPPORT, hostui.continue_prompt(GET_TEXT_F(MSG_FILAMENT_CHANGE_PURGE)));
+
+      wait_for_user = true; // A click or M108 breaks the purge_length loop
+
+      for (float purge_count = purge_length; purge_count > 0 && wait_for_user; --purge_count)
+        unscaled_e_move(1, ADVANCED_PAUSE_PURGE_FEEDRATE);
+
+      //wait_for_user = false;
+
+      TERN_(HOST_PROMPT_SUPPORT, hostui.filament_load_prompt()); // Initiate another host prompt.
+
+      if (show_lcd) {
+        // Show "Purge More" / "Resume" menu and wait for reply
+        KEEPALIVE_STATE(PAUSED_FOR_USER);
+        wait_for_user = false;
+        #if ANY(HAS_MARLINUI_MENU, DWIN_LCD_PROUI)
+          ui.pause_show_message(PAUSE_MESSAGE_OPTION); // Also sets PAUSE_RESPONSE_WAIT_FOR
+        #else
+          pause_menu_response = PAUSE_RESPONSE_WAIT_FOR;
+        #endif
+        while (pause_menu_response == PAUSE_RESPONSE_WAIT_FOR) idle_no_sleep();
+      }
+
+      // Keep looping if "Purge More" was selected
+    } while (TERN0(M600_PURGE_MORE_RESUMABLE, pause_menu_response == PAUSE_RESPONSE_EXTRUDE_MORE));
 
   #else
 
