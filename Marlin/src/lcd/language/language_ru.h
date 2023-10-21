@@ -555,7 +555,7 @@ namespace LanguageNarrow_ru {
   LSTR MSG_FILAMENT_CHANGE_OPTION_PURGE     = _UxGT("Выдавить поршень");
   LSTR MSG_FILAMENT_CHANGE_OPTION_RESUME    = _UxGT("[OK]");
   LSTR MSG_FILAMENT_CHANGE_NOZZLE           = _UxGT("Позиция:");
-  LSTR MSG_RUNOUT_SENSOR                    = _UxGT("Датчик оконч.филам.");
+  LSTR MSG_RUNOUT_SENSOR                    = _UxGT("Датчик оконч.матер.");
   LSTR MSG_RUNOUT_DISTANCE_MM               = _UxGT("До конца, мм");
   LSTR MSG_KILL_HOMING_FAILED               = _UxGT("Ошибка парковки");
   LSTR MSG_LCD_PROBING_FAILED               = _UxGT("Ошибка зондирования");
@@ -841,7 +841,7 @@ namespace LanguageWide_ru {
     LSTR MSG_MEDIA_INIT_FAIL                = _UxGT("Сбой инициализации SD");
     LSTR MSG_ADVANCED_SETTINGS              = _UxGT("Расширенные настройки");
     LSTR MSG_KILL_SUBCALL_OVERFLOW          = _UxGT("Переполнение вызова");
-    LSTR MSG_SET_HOME_OFFSETS               = _UxGT("Установ. смещения дома");
+    LSTR MSG_SET_HOME_OFFSETS               = _UxGT("Установ.смещ.дома");
     LSTR MSG_HOME_OFFSET_X                  = _UxGT("Смещение дома X");
     LSTR MSG_HOME_OFFSET_Y                  = _UxGT("Смещение дома Y");
     LSTR MSG_HOME_OFFSET_Z                  = _UxGT("Смещение дома Z");
@@ -904,7 +904,7 @@ namespace LanguageWide_ru {
     LSTR MSG_INFO_PRINT_TIME                = _UxGT("Общее время печати");
     LSTR MSG_INFO_PRINT_LONGEST             = _UxGT("Наидольшее задание");
     LSTR MSG_INFO_PRINT_FILAMENT            = _UxGT("Длина филамента");
-    LSTR MSG_RUNOUT_SENSOR                  = _UxGT("Датчик оконч. филамента");
+    LSTR MSG_RUNOUT_SENSOR                  = _UxGT("Датчик материала");
     LSTR MSG_KILL_MMU2_FIRMWARE             = _UxGT("Обновить прошивку MMU!");
     LSTR MSG_MMU2_EJECTING_FILAMENT         = _UxGT("Извлечение филамента...");
     LSTR MSG_MIX                            = _UxGT("Смешивание");

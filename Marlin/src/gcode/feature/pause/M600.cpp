@@ -151,6 +151,7 @@ void GcodeSuite::M600() {
 
   if (pause_print(retract, park_point, true, unload_length DXC_PASS)) {
     if (standardM600) {
+      RUNOUT_FILAMENT_BUZZ();
       wait_for_confirmation_without_hotend(true, beep_count DXC_PASS);
       resume_print(
         FILAMENT_CHANGE_SLOW_LOAD_LENGTH,

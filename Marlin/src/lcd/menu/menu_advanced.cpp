@@ -269,7 +269,7 @@ void menu_backlash();
 #endif
 
 #if ALL(AUTOTEMP, HAS_TEMP_HOTEND) || ANY(PID_AUTOTUNE_MENU, PID_EDIT_MENU, MPC_AUTOTUNE_MENU, MPC_EDIT_MENU)
-  #define SHOW_MENU_ADVANCED_TEMPERATURE 1
+  #define SHOW_MENU_ADVANCED_TEMPERATURE 0
 #endif
 
 //
@@ -751,7 +751,7 @@ void menu_advanced_settings() {
   #endif
 
   #if DISABLED(NO_VOLUMETRICS) || ENABLED(ADVANCED_PAUSE_FEATURE)
-    SUBMENU(MSG_FILAMENT, menu_advanced_filament);
+    //SUBMENU(MSG_FILAMENT, menu_advanced_filament);
   #elif ENABLED(LIN_ADVANCE)
     #if DISTINCT_E < 2
       EDIT_ITEM(float42_52, MSG_ADVANCE_K, &planner.extruder_advance_K[0], 0, 10);

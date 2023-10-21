@@ -641,10 +641,10 @@ void menu_configuration() {
   #endif
 
   // Preheat configurations
-  #if HAS_PREHEAT && DISABLED(SLIM_LCD_MENUS)
-    for (uint8_t m = 0; m < PREHEAT_COUNT; ++m)
-      SUBMENU_N_f(m, ui.get_preheat_label(m), MSG_PREHEAT_M_SETTINGS, _menu_configuration_preheat_settings);
-  #endif
+  //#if HAS_PREHEAT && DISABLED(SLIM_LCD_MENUS)
+  //  for (uint8_t m = 0; m < PREHEAT_COUNT; ++m)
+  //    SUBMENU_N_f(m, ui.get_preheat_label(m), MSG_PREHEAT_M_SETTINGS, _menu_configuration_preheat_settings);
+  //#endif
 
   #if ENABLED(SOUND_MENU_ITEM)
     EDIT_ITEM(bool, MSG_SOUND, &ui.sound_on, []{ ui.chirp(); });

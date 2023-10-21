@@ -134,3 +134,4 @@
 #define ERR_BUZZ() BUZZ(400, 40)
 #define OKAY_BUZZ() do{ BUZZ(100, 659); BUZZ(10); BUZZ(100, 698); }while(0)
 #define DONE_BUZZ(ok) do{ if (ok) OKAY_BUZZ(); else ERR_BUZZ(); }while(0)
+#define RUNOUT_FILAMENT_BUZZ() do{ BUZZ(100, 700); BUZZ(10); BUZZ(100, 823); BUZZ(100, 400); BUZZ(300, 433); }while(0)

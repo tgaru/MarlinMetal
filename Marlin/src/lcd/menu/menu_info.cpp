@@ -106,6 +106,7 @@ void menu_info_thermistors() {
     PSTRING_ITEM(MSG_INFO_MAX_TEMP, STRINGIFY(HTR##_MAXTEMP), SS_FULL); \
     STATIC_ITEM(TERN(WAT, MSG_INFO_RUNAWAY_ON, MSG_INFO_RUNAWAY_OFF), SS_FULL) \
 
+  /*
   #if HAS_EXTRUDERS
     #define THERMISTOR_ID TEMP_SENSOR_0
     #include "../thermistornames.h"
@@ -160,6 +161,7 @@ void menu_info_thermistors() {
     #undef THERMISTOR_ID
     THERM_ITEMS(STR_E7, HEATER_7, WATCH_HOTENDS);
   #endif
+  */
 
   #if HAS_HEATED_BED
     #undef THERMISTOR_ID
