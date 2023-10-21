@@ -261,6 +261,8 @@ bool load_filament(const_float_t slow_load_length/*=0*/, const_float_t fast_load
 
   #if ENABLED(ADVANCED_PAUSE_CONTINUOUS_PURGE)
 
+    pause_menu_response = PAUSE_RESPONSE_EXTRUDE_MORE_BACK;
+
     do {
       if (show_lcd) ui.pause_show_message(PAUSE_MESSAGE_PURGE);
 
@@ -269,10 +271,14 @@ bool load_filament(const_float_t slow_load_length/*=0*/, const_float_t fast_load
 
       wait_for_user = true; // A click or M108 breaks the purge_length loop
 
-      for (float purge_count = purge_length; purge_count > 0 && wait_for_user; --purge_count)
-        unscaled_e_move(1, ADVANCED_PAUSE_PURGE_FEEDRATE);
-
-      //wait_for_user = false;
+      for (float purge_count = purge_length; purge_count > 0 && wait_for_user; --purge_count) {
+        if (pause_menu_response == PAUSE_RESPONSE_EXTRUDE_MORE) {
+          unscaled_e_move(1, ADVANCED_PAUSE_PURGE_FEEDRATE);
+        }
+        else {
+            unscaled_e_move(-5, ADVANCED_PAUSE_PURGE_FEEDRATE);
+        }
+      }
 
       TERN_(HOST_PROMPT_SUPPORT, hostui.filament_load_prompt()); // Initiate another host prompt.
 
@@ -289,7 +295,7 @@ bool load_filament(const_float_t slow_load_length/*=0*/, const_float_t fast_load
       }
 
       // Keep looping if "Purge More" was selected
-    } while (TERN0(M600_PURGE_MORE_RESUMABLE, pause_menu_response == PAUSE_RESPONSE_EXTRUDE_MORE));
+    } while (TERN0(M600_PURGE_MORE_RESUMABLE, pause_menu_response == PAUSE_RESPONSE_EXTRUDE_MORE or pause_menu_response == PAUSE_RESPONSE_EXTRUDE_MORE_BACK));
 
   #else
 
@@ -612,6 +618,15 @@ void wait_for_confirmation(const bool is_reload/*=false*/, const int8_t max_beep
   TERN_(DUAL_X_CARRIAGE, set_duplication_enabled(saved_ext_dup_mode, saved_ext));
 }
 
+void wait_for_confirmation_without_hotend(const bool is_reload/*=false*/, const int8_t max_beep_count/*=0*/ DXC_ARGS) {
+  show_continue_prompt(is_reload);
+  KEEPALIVE_STATE(PAUSED_FOR_USER);
+  wait_for_user = true;    // LCD click or M108 will clear this
+  while (wait_for_user) {
+    idle_no_sleep();
+  }
+}
+
 /**
  * Resume or Start print procedure
  *
@@ -649,6 +664,7 @@ void resume_print(const_float_t slow_load_length/*=0*/, const_float_t fast_load_
 
   // Re-enable the heaters if they timed out
   bool nozzle_timed_out = false;
+  /*
   HOTEND_LOOP() {
     nozzle_timed_out |= thermalManager.heater_idle[e].timed_out;
     thermalManager.reset_hotend_idle_timer(e);
@@ -656,19 +672,22 @@ void resume_print(const_float_t slow_load_length/*=0*/, const_float_t fast_load_
 
   if (targetTemp > thermalManager.degTargetHotend(active_extruder))
     thermalManager.setTargetHotend(targetTemp, active_extruder);
+  */
 
   // Load the new filament
   load_filament(slow_load_length, fast_load_length, purge_length, max_beep_count, true, nozzle_timed_out, PAUSE_MODE_SAME DXC_PASS);
 
+  /*
   if (targetTemp > 0) {
     thermalManager.setTargetHotend(targetTemp, active_extruder);
     thermalManager.wait_for_hotend(active_extruder, false);
   }
+  */
 
   ui.pause_show_message(PAUSE_MESSAGE_RESUME);
 
   // Check Temperature before moving hotend
-  ensure_safe_temperature(DISABLED(BELTPRINTER));
+  //ensure_safe_temperature(DISABLED(BELTPRINTER));
 
   // Retract to prevent oozing
   unscaled_e_move(-(PAUSE_PARK_RETRACT_LENGTH), feedRate_t(PAUSE_PARK_RETRACT_FEEDRATE));

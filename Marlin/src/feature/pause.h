@@ -63,6 +63,7 @@ enum PauseMessage : char {
   enum PauseMenuResponse : char {
     PAUSE_RESPONSE_WAIT_FOR,
     PAUSE_RESPONSE_EXTRUDE_MORE,
+    PAUSE_RESPONSE_EXTRUDE_MORE_BACK,
     PAUSE_RESPONSE_RESUME_PRINT
   };
   extern PauseMenuResponse pause_menu_response;
@@ -91,6 +92,16 @@ void wait_for_confirmation(
   const bool      is_reload=false,                            // Reload Filament? (otherwise Resume Print)
   const int8_t    max_beep_count=0                            // Beep alert for attention
   DXC_PARAMS                                                  // Dual-X-Carriage extruder index
+);
+
+void wait_for_confirmation_without_hotend(
+  const bool      is_reload=false,                            // Reload Filament? (otherwise Resume Print)
+  const int8_t    max_beep_count=0                            // Beep alert for attention
+  DXC_PARAMS                                                  // Dual-X-Carriage extruder index
+);
+
+void show_continue_prompt(
+  const bool      is_reload=false                            // Reload Filament? (otherwise Resume Print)
 );
 
 void resume_print(

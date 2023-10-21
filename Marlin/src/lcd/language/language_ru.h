@@ -35,7 +35,7 @@ namespace LanguageNarrow_ru {
   constexpr uint8_t CHARSIZE                = 2;
   LSTR LANGUAGE                             = _UxGT("Russian");
 
-  LSTR WELCOME_MSG                          = MACHINE_NAME _UxGT(" Готов.");
+  LSTR WELCOME_MSG                          = _UxGT("Принтер готов.");
   LSTR MSG_YES                              = _UxGT("Да");
   LSTR MSG_NO                               = _UxGT("Нет");
   LSTR MSG_BACK                             = _UxGT("Назад");
@@ -441,8 +441,8 @@ namespace LanguageNarrow_ru {
   LSTR MSG_TOOL_MIGRATION_AUTO              = _UxGT("Авто смена");
   LSTR MSG_TOOL_MIGRATION_END               = _UxGT("Последний экструдер");
   LSTR MSG_TOOL_MIGRATION_SWAP              = _UxGT("Замена на *");
-  LSTR MSG_FILAMENTCHANGE                   = _UxGT("Смена филамента");
-  LSTR MSG_FILAMENTCHANGE_E                 = _UxGT("Смена филамента *");
+  LSTR MSG_FILAMENTCHANGE                   = _UxGT("Смена картриджа");
+  LSTR MSG_FILAMENTCHANGE_E                 = _UxGT("Смена картриджа *");
   LSTR MSG_FILAMENTLOAD                     = _UxGT("Загрузить филамент");
   LSTR MSG_FILAMENTLOAD_E                   = _UxGT("Подать филамент *");
   LSTR MSG_FILAMENTUNLOAD_E                 = _UxGT("Убрать филамент *");
@@ -546,14 +546,15 @@ namespace LanguageNarrow_ru {
   LSTR MSG_DAC_PERCENT_N                    = _UxGT("@ Привод, %");
   LSTR MSG_ERROR_TMC                        = _UxGT("СБОЙ СВЯЗИ С TMC");
   LSTR MSG_DAC_EEPROM_WRITE                 = _UxGT("Запись DAC в EEPROM");
-  LSTR MSG_FILAMENT_CHANGE_HEADER           = _UxGT("ЗАМЕНА ФИЛАМЕНТА");
+  LSTR MSG_FILAMENT_CHANGE_HEADER           = _UxGT("ЗАМЕНА КАРТРИДЖА");
   LSTR MSG_FILAMENT_CHANGE_HEADER_PAUSE     = _UxGT("ПЕЧАТЬ НА ПАУЗЕ");
   LSTR MSG_FILAMENT_CHANGE_HEADER_LOAD      = _UxGT("ЗАГРУЗКА ФИЛАМЕНТА");
   LSTR MSG_FILAMENT_CHANGE_HEADER_UNLOAD    = _UxGT("ВЫГРУЗКА ФИЛАМЕНТА");
   LSTR MSG_FILAMENT_CHANGE_OPTION_HEADER    = _UxGT("ОПЦИИ ПРОДОЛЖЕНИЯ:");
-  LSTR MSG_FILAMENT_CHANGE_OPTION_PURGE     = _UxGT("Выдавить ещё");
-  LSTR MSG_FILAMENT_CHANGE_OPTION_RESUME    = _UxGT("Возобновить печать");
-  LSTR MSG_FILAMENT_CHANGE_NOZZLE           = _UxGT("  Сопла: ");
+  LSTR MSG_FILAMENT_CHANGE_OPTION_BACK_PISTON = _UxGT("Втянуть поршень");
+  LSTR MSG_FILAMENT_CHANGE_OPTION_PURGE     = _UxGT("Выдавить поршень");
+  LSTR MSG_FILAMENT_CHANGE_OPTION_RESUME    = _UxGT("[OK]");
+  LSTR MSG_FILAMENT_CHANGE_NOZZLE           = _UxGT("Позиция:");
   LSTR MSG_RUNOUT_SENSOR                    = _UxGT("Датчик оконч.филам.");
   LSTR MSG_RUNOUT_DISTANCE_MM               = _UxGT("До конца, мм");
   LSTR MSG_KILL_HOMING_FAILED               = _UxGT("Ошибка парковки");
@@ -929,14 +930,14 @@ namespace LanguageTall_ru {
   #if LCD_HEIGHT >= 4
     // Filament Change screens show up to 3 lines on a 4-line display
     LSTR MSG_ADVANCED_PAUSE_WAITING         = _UxGT(MSG_3_LINE("Нажмите кнопку", "для продолжения", "печати"));
-    LSTR MSG_FILAMENT_CHANGE_INIT           = _UxGT(MSG_2_LINE("Ожидайте начала", "смены филамента"));
-    LSTR MSG_FILAMENT_CHANGE_INSERT         = _UxGT(MSG_3_LINE("Вставьте филамент", "и нажмите кнопку", "для продолжения"));
+    LSTR MSG_FILAMENT_CHANGE_INIT           = _UxGT(MSG_2_LINE("Ожидайте начала", "смены картриджа"));
+    LSTR MSG_FILAMENT_CHANGE_INSERT         = _UxGT(MSG_3_LINE("Нажмите кнопку", "для втягивания", "поршня"));
     LSTR MSG_FILAMENT_CHANGE_HEAT           = _UxGT(MSG_3_LINE("Нажмите кнопку", "для нагрева", "сопла..."));
     LSTR MSG_FILAMENT_CHANGE_HEATING        = _UxGT(MSG_2_LINE("Нагрев сопла", "Ждите..."));
     LSTR MSG_FILAMENT_CHANGE_UNLOAD         = _UxGT(MSG_3_LINE("Ожидайте", "выгрузки", "филамента"));
     LSTR MSG_FILAMENT_CHANGE_LOAD           = _UxGT(MSG_3_LINE("Ожидайте", "загрузки", "филамента"));
     LSTR MSG_FILAMENT_CHANGE_PURGE          = _UxGT(MSG_3_LINE("Ожидайте", "экструзии", "филамента"));
-    LSTR MSG_FILAMENT_CHANGE_CONT_PURGE     = _UxGT(MSG_3_LINE("Нажмите кнопку", "для завершения", "прочистки филамента"));
+    LSTR MSG_FILAMENT_CHANGE_CONT_PURGE     = _UxGT(MSG_3_LINE("Нажмите кнопку", "для остановки", "поршня"));
     LSTR MSG_FILAMENT_CHANGE_RESUME         = _UxGT(MSG_3_LINE("Ожидайте", "возобновления", "печати"));
   #endif
 }

@@ -151,7 +151,7 @@ void GcodeSuite::M600() {
 
   if (pause_print(retract, park_point, true, unload_length DXC_PASS)) {
     if (standardM600) {
-      wait_for_confirmation(true, beep_count DXC_PASS);
+      wait_for_confirmation_without_hotend(true, beep_count DXC_PASS);
       resume_print(
         FILAMENT_CHANGE_SLOW_LOAD_LENGTH,
         ABS(parser.axisunitsval('L', E_AXIS, fc_settings[active_extruder].load_length)),
