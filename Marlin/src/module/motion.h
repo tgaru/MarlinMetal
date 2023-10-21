@@ -118,9 +118,9 @@ extern int16_t feedrate_percentage;
   constexpr uint8_t active_extruder = 0;
 #endif
 
-#if ENABLED(LCD_SHOW_E_TOTAL)
+//#if ENABLED(LCD_SHOW_E_TOTAL)
   extern float e_move_accumulator;
-#endif
+//#endif
 
 #ifdef __IMXRT1062__
   #define DEFS_PROGMEM
