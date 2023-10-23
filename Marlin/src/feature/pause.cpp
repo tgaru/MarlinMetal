@@ -276,7 +276,7 @@ bool load_filament(const_float_t slow_load_length/*=0*/, const_float_t fast_load
           unscaled_e_move(1, ADVANCED_PAUSE_PURGE_FEEDRATE);
         }
         else {
-            unscaled_e_move(-5, ADVANCED_PAUSE_PURGE_FEEDRATE);
+          unscaled_e_move(-5, ADVANCED_PAUSE_PURGE_FEEDRATE);
         }
       }
 
